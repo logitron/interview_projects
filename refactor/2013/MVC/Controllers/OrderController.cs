@@ -32,6 +32,15 @@ namespace MVC.Controllers
             return View("PastOrders");
         }
 
+        [HttpGet]
+        public JsonResult GetProducts()
+        {
+            var product_repo = (IProductRepo)System.Web.HttpContext.Current.Application["product_repository"];
+            var items = product_repo.GetItems();
+
+            return Json(items, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public ActionResult Save(FormCollection form_collection)
         {
@@ -68,7 +77,7 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddToOrder(FormCollection form_collection)
+        public JsonResult AddToOrder(FormCollection form_collection)
         {
             var product_repo = (IProductRepo)System.Web.HttpContext.Current.Application["product_repository"];
             var items = product_repo.GetItems();
@@ -110,7 +119,7 @@ namespace MVC.Controllers
 
             Session["order_items"] = order_items;
 
-            return View("Index");
+            return Json(order_item);
         }
     }
 }

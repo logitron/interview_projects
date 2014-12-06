@@ -368,3 +368,52 @@ img.aligncenter {
 
 #footer a {
 }
+
+table {
+    width: 100%;
+}
+
+.product_list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.product_list li.header div {
+    font-weight: bold;
+}
+
+.product_list li div {
+    display: block;
+    float: left;
+    padding: 3px 5px;
+}
+
+.product_list li form {
+    margin: 0px;
+    padding: 0px;
+}
+
+.product_list li div.product_description {
+    width: 200px;
+}
+
+.product_list li div.product_price {
+    width: 70px;
+}
+
+.product_list li div.product_quantity {
+    width: 80px;
+}
+
+.product_list li div.product_submit {
+    
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
