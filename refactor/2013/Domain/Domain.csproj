@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MockProductRepo.cs" />
-    <Compile Include="IOrderRepository.cs" />
+    <Compile Include="IOrderRepo.cs" />
     <Compile Include="IProductRepo.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Order.cs" />

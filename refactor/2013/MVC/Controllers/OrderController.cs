@@ -24,7 +24,7 @@ namespace MVC.Controllers
 
         public ActionResult ViewPastOrders()
         {
-            var order_repository = (IOrderRepository)System.Web.HttpContext.Current.Application["order_repository"];
+            var order_repository = (IOrderRepo)System.Web.HttpContext.Current.Application["order_repository"];
             var orders = order_repository.GetOrders();
 
             ViewData["orders"] = orders;
@@ -45,7 +45,7 @@ namespace MVC.Controllers
         public ActionResult Save(FormCollection form_collection)
         {
             //Save Order
-            var order_repository = (IOrderRepository)System.Web.HttpContext.Current.Application["order_repository"];
+            var order_repository = (IOrderRepo)System.Web.HttpContext.Current.Application["order_repository"];
             var order_items = (IList<OrderItemModel>)Session["order_items"];
             var order = new Order();
 

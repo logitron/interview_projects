@@ -2,7 +2,7 @@
 
 namespace Domain
 {
-    public class MockOrderRepo : IOrderRepository
+    public class MockOrderRepo : IOrderRepo
     {
         public IList<Order> orders;
 
