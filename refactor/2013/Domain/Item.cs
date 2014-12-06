@@ -2,8 +2,8 @@
 {
     public class Item
     {
-        public long id { get; set; }
-        public string description { get; set; }
-        public decimal price { get; set; }
+        public long Id { get; set; }
+        public string Description { get; set; }
+        public decimal Price { get; set; }
     }
 }

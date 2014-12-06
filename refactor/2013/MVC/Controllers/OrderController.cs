@@ -51,8 +51,8 @@ namespace MVC.Controllers
 
             foreach (var order_item in order_items)
             {
-                var item = new OrderItem {item_id = order_item.item_id, quantity = order_item.quantity, price = order_item.price};
-                order.items.Add(item);
+                var item = new OrderItem {Id = order_item.Id, Quantity = order_item.Quantity, Price = order_item.Price};
+                order.Items.Add(item);
             }
 
             order_repository.Save(order);
@@ -107,13 +107,13 @@ namespace MVC.Controllers
             var current_order_items = new List<OrderItemModel>();
             foreach (var orderItem in itemLookup)
             {
-                var item = items.First(x => x.id == orderItem.Key);
+                var item = items.First(x => x.Id == orderItem.Key);
                 var order_item = new OrderItemModel
                 {
-                    item_id = item.id,
-                    price = item.price,
-                    description = item.description,
-                    quantity = orderItem.Value
+                    Id = item.Id,
+                    Price = item.Price,
+                    Description = item.Description,
+                    Quantity = orderItem.Value
                 };
 
                 current_order_items.Add(order_item);

@@ -14,7 +14,7 @@ namespace Domain
         public void Save(Order order)
         {
             var order_count = orders.Count;
-            order.id = order_count + 1;
+            order.Id = order_count + 1;
             orders.Add(order);                 
         }
 

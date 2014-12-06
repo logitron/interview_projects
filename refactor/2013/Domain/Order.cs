@@ -4,12 +4,12 @@ namespace Domain
 {
     public class Order
     {
-        public long id { get; set; }
-        public IList<OrderItem> items { get; set; }
+        public long Id { get; set; }
+        public IList<OrderItem> Items { get; set; }
 
         public Order()
         {
-            items = new List<OrderItem>();
+            Items = new List<OrderItem>();
         }
     }
 }
