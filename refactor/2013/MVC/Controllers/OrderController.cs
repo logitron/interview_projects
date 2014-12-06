@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Mvc;
 using Domain;
 using MVC.Models.Order;
+using Domain.Repositories;
+using Domain.Models;
 
 namespace MVC.Controllers
 {

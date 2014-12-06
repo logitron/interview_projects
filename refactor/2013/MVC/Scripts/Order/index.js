@@ -28,6 +28,8 @@ function OrderViewModel(items) {
                 $.each(data, function (index, element) {
                     self.itemsToOrder.push(element);
                 });
+
+                $('[id ^= "item_quantity_"]').val(0);
             },
             dataType: 'json'
         });
