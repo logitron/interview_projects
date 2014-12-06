@@ -84,42 +84,46 @@ namespace MVC.Controllers
 
             ViewData["items"] = items;
 
-            IList<OrderItemModel> order_items = (IList<OrderItemModel>)Session["order_items"];
+            List<OrderItemModel> order_items = (List<OrderItemModel>)Session["order_items"];
             if (order_items == null)
             {
                 order_items = new List<OrderItemModel>();
             }
 
-            int item_id = 0;
-            int item_quantity = 0;
+            var itemLookup = new Dictionary<long, int>();
 
             foreach (var key in form_collection.Keys)
             {
-                if (key.ToString().StartsWith("item_id"))
-                {
-                    item_id = int.Parse(form_collection[key.ToString()]);
-                }
-
                 if (key.ToString().StartsWith("item_quantity"))
                 {
-                    item_quantity = int.Parse(form_collection[key.ToString()]);
+                    var id = long.Parse(key.ToString().Replace("item_quantity_", ""));
+                    var quantity = int.Parse(form_collection[key.ToString()]);
+
+                    if (quantity > 0)
+                        itemLookup.Add(id, quantity);
                 }
             }
 
-            var item = items.First(x => x.id == item_id);
-            var order_item = new OrderItemModel
-                                    {
-                                        item_id=item.id,
-                                        price=item.price,
-                                        description = item.description,
-                                        quantity = item_quantity
-                                    };
+            var current_order_items = new List<OrderItemModel>();
+            foreach (var orderItem in itemLookup)
+            {
+                var item = items.First(x => x.id == orderItem.Key);
+                var order_item = new OrderItemModel
+                {
+                    item_id = item.id,
+                    price = item.price,
+                    description = item.description,
+                    quantity = orderItem.Value
+                };
 
-            order_items.Add(order_item);
+                current_order_items.Add(order_item);
+            }
+
+            order_items.AddRange(current_order_items);
 
             Session["order_items"] = order_items;
 
-            return Json(order_item);
+            return Json(current_order_items);
         }
     }
 }

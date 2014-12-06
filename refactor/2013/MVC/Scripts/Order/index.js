@@ -18,6 +18,20 @@ function OrderViewModel(items) {
             dataType: 'json'
         });
     };
+
+    self.addItems = function (formElement) {
+        $.ajax({
+            type: 'POST',
+            url: '/Order/AddToOrder',
+            data: $(formElement).serialize(),
+            success: function (data) {
+                $.each(data, function (index, element) {
+                    self.itemsToOrder.push(element);
+                });
+            },
+            dataType: 'json'
+        });
+    }
 };
 
 $(document).ready(function () {

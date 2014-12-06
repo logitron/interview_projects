@@ -22,30 +22,35 @@
 			<div id="content">
                 <div>
                     <h1>Items available to purchase</h1>
-                    <ul class="product_list">
-                        <li class="header clearfix">
-                            <div class="product_description">Description</div>
-                            <div class="product_price">Price</div>
-                            <div class="product_quantity">Quantity</div>
-                        </li>
-                    </ul>
 
-                    <ul class="product_list" data-bind="foreach: items">
-                        <li class="clearfix">
-                            <form data-bind="submit: $parent.addItem">
+                    <form data-bind="submit: addItems">
+                        <ul class="product_list">
+                            <li class="header clearfix">
+                                <div class="product_description">Description</div>
+                                <div class="product_price">Price</div>
+                                <div class="product_quantity">Quantity</div>
+                            </li>
+                        </ul>
+
+                        <ul class="product_list" data-bind="foreach: items">
+                            <li class="clearfix">
                                 <input type="hidden" data-bind="attr: { id: 'item_id_' + id, name: 'item_id_' + id, value: id }" />
                                 <div class="product_description" data-bind="text: description"></div>
                                 <div class="product_price" data-bind="text: formatCurrency(price)"></div>
-                                <div class="product_quantity"><input type="text" data-bind="attr: { id: 'item_quantity_' + id, name: 'item_quantity_' + id }" style="width: 50px;" value="1" /></div>
-                                <div class="product_submit"><input type="submit" value="Add to order" /></div>
-                            </form>
-                        </li>
-                    </ul>
+                                <div class="product_quantity"><input type="text" data-bind="attr: { id: 'item_quantity_' + id, name: 'item_quantity_' + id }" style="width: 50px;" value="0" /></div>
+                            </li>
+                        </ul>
+
+                        <br />
+                        <input type="submit" value="Add to order" />
+                    </form>
                 </div>
 
                 <p></p>
 
                 <div data-bind="visible: itemsToOrder().length > 0">
+                    <br />
+                    <hr />
                     <h1>Items to Order</h1>
                     <form action="@Url.Action("Save", "Order")" method="POST">
                         <table>
@@ -67,6 +72,7 @@
                             </tbody>
                         </table>
 
+                        <br />
                         <input type="submit" value="Submit order" />
                     </form>
                 </div>
