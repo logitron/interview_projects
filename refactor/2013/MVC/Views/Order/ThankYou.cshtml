@@ -1,0 +1,38 @@
+﻿@using Domain
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="../../Content/yellowing/style.css" rel="stylesheet" type="text/css" />
+
+    <title>Index</title>
+</head>
+<body>
+    <div id="wrapper">
+	    <div id="header">
+		    <div id="logo">
+			    <h1>Ordering System</h1>
+		    </div>
+        </div>
+
+	    <div id="page">
+		    <div id="page-bgtop">
+			    <div id="page-bgbtm">
+				    <div id="menu">
+					    <ul>
+						    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li><a href="@Url.Action("Index","Order")">Order</a></li>
+                            <li><a href="@Url.Action("ViewPastOrders","Order")">Past Orders</a></li>
+					    </ul>
+				    </div>
+
+				    <div id="content">
+                        Thank you for your order and email has been sent with details of your order.         
+                        Your order number is @(((Order)ViewData["order"]).id)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
