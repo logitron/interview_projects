@@ -13,14 +13,8 @@ namespace MVC.Controllers
     {
         public ActionResult Index()
         {
-            var items = new List<Item>()
-                            {
-                                new Item(){description = "Red Stapler",price = 50, id = 1},
-                                new Item(){description = "TPS Report", price = 3, id = 2},
-                                new Item(){description = "Printer", price = 400, id = 3},
-                                new Item(){description = "Baseball bat", price = 80, id = 4},
-                                new Item(){description = "Michael Bolton CD", price = 12, id = 5}
-                            };
+            var product_repo = (IProductRepo)System.Web.HttpContext.Current.Application["product_repository"];
+            var items = product_repo.GetItems();
 
             ViewData["items"] = items;
             Session["order_items"] = new List<OrderItemModel>();
@@ -30,8 +24,8 @@ namespace MVC.Controllers
 
         public ActionResult ViewPastOrders()
         {
-            var order_repository = (OrderRepository)System.Web.HttpContext.Current.Application["order_repository"];
-            var orders = order_repository.get_all();
+            var order_repository = (IOrderRepository)System.Web.HttpContext.Current.Application["order_repository"];
+            var orders = order_repository.GetOrders();
 
             ViewData["orders"] = orders;
 
@@ -42,7 +36,7 @@ namespace MVC.Controllers
         public ActionResult Save(FormCollection form_collection)
         {
             //Save Order
-            var order_repository = (OrderRepository)System.Web.HttpContext.Current.Application["order_repository"];
+            var order_repository = (IOrderRepository)System.Web.HttpContext.Current.Application["order_repository"];
             var order_items = (IList<OrderItemModel>)Session["order_items"];
             var order = new Order();
 
@@ -52,7 +46,7 @@ namespace MVC.Controllers
                 order.items.Add(item);
             }
 
-            order_repository.save(order);
+            order_repository.Save(order);
 
             //Send email
             MailMessage email = new MailMessage("peter@initech.com","ordering@initech.com");
@@ -64,7 +58,7 @@ namespace MVC.Controllers
             {
                 client.Send(email);
             }
-            catch(Exception exception)
+            catch(Exception)
             {
                 //It is ok that it doesn't actually send the email for this project    
             }
@@ -76,14 +70,8 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult AddToOrder(FormCollection form_collection)
         {
-            var items = new List<Item>()
-                            {
-                                new Item(){description = "Red Stapler",price = 50, id = 1},
-                                new Item(){description = "TPS Report", price = 3, id = 2},
-                                new Item(){description = "Printer", price = 400, id = 3},
-                                new Item(){description = "Baseball bat", price = 80, id = 4},
-                                new Item(){description = "Michael Bolton CD", price = 12, id = 5}
-                            };
+            var product_repo = (IProductRepo)System.Web.HttpContext.Current.Application["product_repository"];
+            var items = product_repo.GetItems();
 
             ViewData["items"] = items;
 

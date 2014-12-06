@@ -38,7 +38,8 @@ namespace MVC
             RegisterRoutes(RouteTable.Routes);
 
             //1 order repository for the entire project
-            Application["order_repository"] = new OrderRepository();
+            Application["order_repository"] = new MockOrderRepo();
+            Application["product_repository"] = new MockProductRepo();
         }
     }
 }

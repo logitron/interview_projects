@@ -2,23 +2,23 @@
 
 namespace Domain
 {
-    public class OrderRepository
+    public class MockOrderRepo : IOrderRepository
     {
         public IList<Order> orders;
 
-        public OrderRepository()
+        public MockOrderRepo()
         {
             orders = new List<Order>();                 
         }     
 
-        public void save(Order order)
+        public void Save(Order order)
         {
             var order_count = orders.Count;
             order.id = order_count + 1;
             orders.Add(order);                 
         }
 
-        public IList<Order> get_all()
+        public IList<Order> GetOrders()
         {
             return orders;
         } 
